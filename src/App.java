@@ -27,7 +27,7 @@ public class App extends Application{
 
         Button funder = new Button("Company / VC");
         Button individual = new Button("Individual");
-        Label initialQuestion = new Label("Are you a");
+        Label initialQuestion = new Label("Are you a wierdo");
 
         root.add(initialQuestion, 1, 0);
         root.add(funder, 0, 1);
