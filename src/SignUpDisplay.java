@@ -5,7 +5,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class SignUpDisplay {
-    public Scene companySignUp(User user){
+    static public Scene companySignUp(User user){
 
         GridPane profileRoot = new GridPane();
         Scene profileScene = new Scene(profileRoot, 800, 800);
@@ -14,11 +14,11 @@ public class SignUpDisplay {
         TextField company = new TextField("Enter Company Name");
         TextField url = new TextField("Company URL");
         Button submit = new Button("Sign Up");
-        int xVal = 300;
-        profileRoot.add(company, xVal, 0);
-        profileRoot.add(email, xVal, 1);
-        profileRoot.add(url, 0, 2);
-        profileRoot.add(submit, xVal, 6);
+        int xVal = 2;
+        profileRoot.add(company, xVal, 1);
+        profileRoot.add(email, xVal, 2);
+        profileRoot.add(url, xVal, 3);
+        profileRoot.add(submit, xVal, 4);
 
 
         submit.setOnAction(event -> {

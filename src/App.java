@@ -36,7 +36,7 @@ public class App extends Application{
         //pressing individual button moves you to new scene
         individual.setOnAction(event -> {
             user = new Funder();
-            primaryStage.setScene(signUpScene);
+            primaryStage.setScene(SignUpDisplay.companySignUp(user));
         });
 
 
