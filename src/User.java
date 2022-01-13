@@ -15,6 +15,12 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getEmail() {
+        return email;
+    }
     public int getUserId() {
         return userId;
     }
