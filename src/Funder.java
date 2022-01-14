@@ -9,10 +9,10 @@ public class Funder extends User{
     }
 
 
-    public String getURL() {
+    public String getUrl() {
         return URL;
     }
-    public void setURL(String uRL) {
+    public void setUrl(String uRL) {
         URL = uRL;
     }
     

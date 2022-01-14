@@ -15,8 +15,13 @@ import javafx.stage.Stage;
 public class App extends Application{
     public static User user;
     public static Text userName;
+    public static Stage primaryStage;
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static void setScene(){
+
     }
     
     @Override
@@ -24,10 +29,12 @@ public class App extends Application{
         primaryStage.setTitle("Life");
         GridPane root = new GridPane();
         Scene scene = new Scene(root, 800, 800);
+        scene.getStylesheets().add("style.css");
+        root.getStyleClass().add("test");
 
         Button funder = new Button("Company / VC");
         Button individual = new Button("Individual");
-        Label initialQuestion = new Label("Are you a wierdo");
+        Label initialQuestion = new Label("Are you a");
 
         root.add(initialQuestion, 1, 0);
         root.add(funder, 0, 1);
@@ -35,6 +42,11 @@ public class App extends Application{
 
         //pressing individual button moves you to new scene
         individual.setOnAction(event -> {
+            user = new Individual();
+            primaryStage.setScene(SignUpDisplay.individualSignUp((Individual)user));
+        });
+
+        funder.setOnAction(event -> {
             user = new Funder();
             primaryStage.setScene(SignUpDisplay.companySignUp((Funder)user));
         });
