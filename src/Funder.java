@@ -8,7 +8,6 @@ public class Funder extends User{
         super(true);
     }
 
-
     public String getUrl() {
         return URL;
     }
