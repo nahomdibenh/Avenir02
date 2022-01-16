@@ -85,7 +85,7 @@ public class App extends Application{
             // primaryStage.setScene(postScene);
         });
         post.setOnAction(event -> {
-            user = new Funder();
+            // user = new Funder();
             primaryStage.setScene(DisplayPostForm.postForm());
             // primaryStage.setScene(postScene);
         });
