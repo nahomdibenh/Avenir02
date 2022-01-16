@@ -35,9 +35,10 @@ public class SignUpDisplay {
             // user.setEmail(email.getText());
             // user.setName(company.getText());
             // user.setUrl(url.getText());
+
             form.actionBasedOnLabels(user);
-            
             profileRoot.add(new Text(user.name), 0, 0);
+            // profileScene.setScene(App.homeScene);
         });
 
         return profileScene;
