@@ -6,9 +6,23 @@ import javafx.scene.text.Text;
 
 public class DisplayPostForm {
     //refer to signupdisplay for potential view 
+    static public Scene homeScreen(){
+
+        GridPane homeRoot = new GridPane();
+        Scene homeScene = new Scene(homeRoot, 600, 800);
+        homeScene.getStylesheets().add("style.css");
+        homeRoot.getStyleClass().add("test");
+
+        Button submit = new Button("Post");
+        homeRoot.add(submit, 0, 6);
+
+        return homeScene;
+    }
     static public Scene postForm(){
         GridPane profileRoot = new GridPane();
         Scene profileScene = new Scene(profileRoot, 800, 800);
+        profileScene.getStylesheets().add("style.css");
+        profileRoot.getStyleClass().add("test");
 
         //make text field 
         //post title 
@@ -18,8 +32,7 @@ public class DisplayPostForm {
         //details(specifics)
 
         //Form title = new Form
-        profileScene.getStylesheets().add("style.css");
-        profileRoot.getStyleClass().add("test");
+        
 
         // FormField email = new FormField("Email", "email");
         // FormField company = new FormField("Company Name", "name");
@@ -38,6 +51,7 @@ public class DisplayPostForm {
             // user.setEmail(email.getText());
             // user.setName(company.getText());
             // user.setUrl(url.getText());
+            
             
         });
         return profileScene;
