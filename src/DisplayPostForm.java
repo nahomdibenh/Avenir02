@@ -18,6 +18,7 @@ public class DisplayPostForm {
 
         return homeScene;
     }
+    
     static public Scene postForm(){
         GridPane profileRoot = new GridPane();
         Scene profileScene = new Scene(profileRoot, 800, 800);
@@ -54,6 +55,7 @@ public class DisplayPostForm {
             
             
         });
+        App.setScene(profileScene);;
         return profileScene;
     }
 }

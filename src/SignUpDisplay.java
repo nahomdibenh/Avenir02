@@ -6,7 +6,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class SignUpDisplay {
-    static public Scene companySignUp(Funder user){
+    static public void companySignUp(Funder user){
 
         GridPane profileRoot = new GridPane();
         Scene profileScene = new Scene(profileRoot, 800, 800);
@@ -41,10 +41,10 @@ public class SignUpDisplay {
             // profileScene.setScene(App.homeScene);
         });
 
-        return profileScene;
+        App.setScene(profileScene);
     }
     //this is the individual method for their personal window 
-    static public Scene individualSignUp(Individual user){
+    static public void individualSignUp(Individual user){
 
         GridPane profileRoot = new GridPane();
         Scene profileScene = new Scene(profileRoot, 800, 800);
@@ -74,6 +74,6 @@ public class SignUpDisplay {
             profileRoot.add(new Text(user.name), 0, 0);
         });
 
-        return profileScene;
+        App.setScene(profileScene);
     }
 }
