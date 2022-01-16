@@ -15,17 +15,20 @@ import javafx.stage.Stage;
 public class App extends Application{
     public static User user;
     public static Text userName;
-    public static Stage primaryStage;
+    public static Stage window;
     public static void main(String[] args) {
         launch(args);
     }
 
-    public static void setScene(){
-
+    public static void setScene(Scene scene){
+        App.window.setScene(scene);
     }
     
     @Override
     public void start(Stage primaryStage){
+
+        window = primaryStage;
+
         primaryStage.setTitle("Life");
         GridPane root = new GridPane();
         Scene scene = new Scene(root, 800, 800);
@@ -43,12 +46,14 @@ public class App extends Application{
         //pressing individual button moves you to new scene
         individual.setOnAction(event -> {
             user = new Individual();
-            primaryStage.setScene(SignUpDisplay.individualSignUp((Individual)user));
+            SignUpDisplay.individualSignUp((Individual)user);
+            // primaryStage.setScene(SignUpDisplay.individualSignUp((Individual)user));
         });
 
         funder.setOnAction(event -> {
             user = new Funder();
-            primaryStage.setScene(SignUpDisplay.companySignUp((Funder)user));
+            SignUpDisplay.companySignUp((Funder)user);
+            // primaryStage.setScene(SignUpDisplay.companySignUp((Funder)user));
         });
 
 
