@@ -39,12 +39,12 @@ public class App extends Application{
 
         Button funder = new Button("Company / VC");
         Button individual = new Button("Individual");
-        Button post = new Button("New Post");
+        Button newPost = new Button("New Post");
         Label initialQuestion = new Label("Are you a");
 
         root.add(initialQuestion, 1, 0);
         root.add(funder, 0, 1);
-        root.add(post, 1, 1);
+        root.add(newPost, 1, 1);
         root.add(individual, 2, 1);
 
 
@@ -88,7 +88,7 @@ public class App extends Application{
             SignUpDisplay.companySignUp((Funder)user);
             // primaryStage.setScene(postScene);
         });
-        post.setOnAction(event -> {
+        newPost.setOnAction(event -> {
             // user = new Funder();
             primaryStage.setScene(DisplayPostForm.postForm());
             user = new Funder();

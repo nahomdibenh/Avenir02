@@ -39,6 +39,25 @@ public class FormField extends TextField{
     
     }
 
+    public void actionBasedIDPosts(Post post){
+        String id = this.id;
+        String response = this.getText();
+
+        //both funders and users
+        if (id.equals("title")){
+            post.setTitle(response);
+        }
+        if (id.equals("problmearea")){
+            post.setProblemArea(response);
+        }
+        // if (id.equals("money")){
+        //     post.setPrizeAmount(response);
+        // }
+        //find a way to convert a string to int later, use stack overflow
+
+        
+    }
+
     //display textfield
     public void displayFormField(GridPane pane, int row){
         pane.add(this, 0, row);
