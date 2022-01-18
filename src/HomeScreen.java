@@ -1,5 +1,6 @@
 import java.io.IOException;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -16,10 +17,16 @@ public class HomeScreen {
         homeRoot.getStyleClass().add("test");
 
         Button logout = new Button("Logout");
+        Button post = new Button("New Post");
+        homeRoot.add(post, 0, 1);
         homeRoot.add(logout, 0, 0);
 
         logout.setOnAction(value -> {
             Login.loginDisplay();
+        });
+
+        post.setOnAction(event -> {
+            App.setScene(DisplayPostForm.postForm());
         });
 
         layout.setBottom(homeRoot);

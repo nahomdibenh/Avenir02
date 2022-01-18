@@ -46,13 +46,11 @@ public class SignUp {
 
         Button funder = new Button("Company / VC");
         Button individual = new Button("Individual");
-        Button post = new Button("New Post");
         Button login = new Button("Login");
         Label initialQuestion = new Label("Are you a");
 
         root.add(initialQuestion, 1, 0);
         root.add(funder, 0, 1);
-        root.add(post, 1, 1);
         root.add(individual, 2, 1);
         root.add(login, 1, 2);
 
@@ -76,10 +74,7 @@ public class SignUp {
             ids = "name, email, url, password";
             SignUp.signUpDisplay((Funder)User.currUser);
         });
-        post.setOnAction(event -> {
-            App.setScene(DisplayPostForm.postForm());
-            User.currUser = new Funder();
-        });
+        
 
         login.setOnAction(value -> {
             Login.loginDisplay();
