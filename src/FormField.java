@@ -8,12 +8,14 @@ public class FormField extends TextField{
     public FormField(String label, String id){
         super(label);
         this.id = id;
+        this.setPromptText(label);
     }
 
-    //decide onSubmit action based on id of a formfield
+    //decide onSubmit action based on id of a formfield for sign in and sign up
     public void actionBasedOnLabel(User user){
+        //id is identifier for the formfield, not the user
         String id = this.id;
-        String response = this.getText();
+        String response = this.getText().equals("") ? null : this.getText().equals(this.getPromptText()) ? null : this.getText();
 
         //both funders and users
         if (id.equals("name")){
@@ -21,6 +23,9 @@ public class FormField extends TextField{
         }
         if (id.equals("email")){
             user.setEmail(response);
+        }
+        if (id.equals("password")){
+            user.setPassword(response);
         }
 
         //individual only (fields that will only be set by a formfield)

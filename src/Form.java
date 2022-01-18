@@ -5,18 +5,13 @@ public class Form {
     public FormField[] formFields;
     //possible ui objects: choicebox, passwordfield, heading, buttons
 
-    public Form(int numFormFields, String[] formFieldLabels, String[] formFieldIds){
-        createFormFields(numFormFields, formFieldLabels, formFieldIds);
-
+    public Form(String[] formFieldLabels, String[] formFieldIds){
+        createFormFields(formFieldLabels, formFieldIds);
     }
 
-    // String[] label = {"Title", "Problem Area"};
-    // String[] id = {"title", "problemarea"};
-    // Form form = new Form(5, label, id);
-    // form.displayFormFields(pane)
-
     //create an array of text fields by giving an array of labels and ids/descriptors for an onSetAction methid
-    public void createFormFields(int numFields, String[] labels, String[] ids){
+    public void createFormFields(String[] labels, String[] ids){
+        int numFields = labels.length;
         this.formFields = new FormField[numFields];
         for (int i = 0; i < numFields; i++) {
             formFields[i] = new FormField(labels[i], ids[i]);
@@ -37,12 +32,12 @@ public class Form {
         }
     }
 
-    public int getFormFieldByLabel(String label){
+    public FormField getFormFieldById(String id){
         for (int i = 0; i < formFields.length; i++) {
-            if (formFields[i].id.equals(label)){
-                return i;
+            if (formFields[i].id.equals(id)){
+                return formFields[i];
             }
         }
-        return -1;
+        return null;
     }
 }

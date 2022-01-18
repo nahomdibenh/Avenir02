@@ -5,15 +5,25 @@ import javafx.scene.shape.Shape;
 public class User {
     public static Color[] colors = {Color.PALETURQUOISE, Color.ROYALBLUE, Color.GOLD, Color.SEAGREEN};
     public static int totalUsers;
+    public static User currUser;
     protected boolean funder = false;
-    protected int userId = 0;
+    protected int userId;
     protected String name =  null;
     protected String email = null;
     protected String currentPage = "feed";
+    protected String password;
 
     public User(boolean funder) {
         this.funder = funder;
+        this.userId = totalUsers;
         User.totalUsers += 1;
+    }
+    public User(boolean funder, int userId, String name, String email, String password){
+        this.funder = funder;
+        this.name = name;
+        this.email = email;
+        this.userId = userId;
+        this.password = password;
     }
 
     public String getName() {
@@ -34,8 +44,8 @@ public class User {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-    public void getFunder(boolean getFunder){
-        this.funder = getFunder;
+    public boolean getFunder(){
+        return this.funder;
     }
     public void setFunder(boolean funder) {
         this.funder = funder;
@@ -46,6 +56,14 @@ public class User {
     }
     public void setCurrentPage(String currentPage) {
         this.currentPage = currentPage;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     //choose what color an avatar should be based on modulo of its id

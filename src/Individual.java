@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Individual extends User{
     protected String profession;
-    protected String currentProject;
+    protected int currentProject;
     protected ArrayList<String> interestedPosts;
     protected ArrayList<String> starredPosts;
     // protected ArrayList<ProblemArea> problemAreas;
@@ -11,6 +11,18 @@ public class Individual extends User{
 
     public Individual(){
         super(false);
+    }
+    public Individual(String name, int id, String email, String profession, String skills, String password) {
+        super(false, id, name, email, password);
+        this.profession = profession;
+        this.skills = skills;
+    }
+    public Individual(String profession, int currentProject, String skills, String password, String interestedPosts, String starredPosts, String upvotedPosts) {
+        super(false);
+        this.profession = profession;
+        this.currentProject = currentProject;
+        this.skills = skills;
+        this.password = password;
     }
 
     public String getProfession() {
@@ -25,11 +37,11 @@ public class Individual extends User{
     public void setSkills(String skills) {
         this.skills = skills;
     }
-    public String getCurrentProject() {
+    public int getCurrentProject() {
         return currentProject;
     }
-    public void setCurrentProject(String currentProject) {
-        this.currentProject = currentProject;
+    public void setCurrentProject(int currentProjectId) {
+        this.currentProject = currentProjectId;
     }
 
     // public void setStarredpost(boolean delete, Post post){
