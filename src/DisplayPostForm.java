@@ -13,19 +13,6 @@ public class DisplayPostForm {
         profileScene.getStylesheets().add("style.css");
         profileRoot.getStyleClass().add("test");
 
-        //make text field 
-        //post title 
-        //problem Area
-        //money
-        //desired Proffesion
-        //details(specifics)
-
-        //Form title = new Form
-        
-
-        // FormField email = new FormField("Email", "email");
-        // FormField company = new FormField("Company Name", "name");
-        // FormField url = new FormField("Company URL", "url");
         String[] labels = {"Title", "ProblemArea", "Money","DesiredProffesion", "Details"};
         String[] ids = {"title", "problemarea", "money","desiredproffesion","details"};
         Form form = new Form(labels, ids);
