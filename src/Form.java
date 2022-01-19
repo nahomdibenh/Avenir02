@@ -31,6 +31,12 @@ public class Form {
             formField.actionBasedOnLabel(user);
         }
     }
+    //formfields for posts
+    public void actionBasedOnLabels(Post post){
+        for (FormField formField : formFields) {
+            formField.actionBasedOnPostLabel(post);
+        }
+    }
 
     public FormField getFormFieldById(String id){
         for (int i = 0; i < formFields.length; i++) {

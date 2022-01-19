@@ -44,7 +44,7 @@ public class FormField extends TextField{
     
     }
 
-    public void actionBasedIDPosts(Post post){
+    public void actionBasedOnPostLabel(Post post){
         String id = this.id;
         String response = this.getText();
 

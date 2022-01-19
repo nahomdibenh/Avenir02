@@ -27,7 +27,7 @@ public class DisplayPostForm {
             // user.setEmail(email.getText());
             // user.setName(company.getText());
             // user.setUrl(url.getText());
-            
+            form.actionBasedOnLabels(post);
             App.setScene(HomeScreen.display());
             
         });
