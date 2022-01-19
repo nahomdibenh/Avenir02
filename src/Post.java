@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Post {
     // methods from uml diagrams
@@ -9,9 +10,11 @@ public class Post {
     protected int numUpvotes = 0;
     protected int prizeAmount = 0;
     protected String details = null;
+    static ArrayList<Post> allPosts= new ArrayList<>();
 
     public Post() {
         super();
+        allPosts.add(this);
     }
 
     public int getPostID() {
