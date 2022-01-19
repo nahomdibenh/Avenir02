@@ -5,7 +5,7 @@ public class Individual extends User{
     protected int currentProject;
     protected ArrayList<String> interestedPosts;
     protected ArrayList<String> starredPosts;
-    // protected ArrayList<ProblemArea> problemAreas;
+    protected ArrayList<ProblemArea> problemAreas = new ArrayList<ProblemArea>();
     protected ArrayList<String> upvotedPosts;
     protected String skills;
 
@@ -42,6 +42,9 @@ public class Individual extends User{
     }
     public void setCurrentProject(int currentProjectId) {
         this.currentProject = currentProjectId;
+    }
+    public ArrayList<ProblemArea> getProblemAreas() {
+        return problemAreas;
     }
 
     // public void setStarredpost(boolean delete, Post post){

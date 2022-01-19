@@ -1,5 +1,32 @@
 .test {
     -fx-alignment: center;
-    -fx-hgap: 5;
-    -fx-vgap: 5;
+    -fx-hgap: 7;
+    -fx-vgap: 7;
+}
+
+.text-field {
+    -fx-border-color: rgba(168, 168, 168, 0.507);
+    -fx-border-width: 1 1 1 1;
+    -fx-background-color: white;
+    -fx-prompt-text-fill: gray;
+    -fx-pref-column-count: 15;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+}
+.text-field:focused {
+    -fx-border-color: -fx-focus-color;
+}
+
+.menu-buttons {
+    -fx-background-color: #5996ff;
+    -fx-text-fill: #ffffff;
+}
+
+.submit-button {
+    -fx-background-color: #009c53;
+    -fx-text-fill: #fff;
+}
+
+.neutral-button {
+    -fx-background-color: rgb(250, 235, 19);
 }

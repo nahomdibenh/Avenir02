@@ -8,9 +8,8 @@ public class User {
     public static User currUser;
     protected boolean funder = false;
     protected int userId;
-    protected String name =  null;
-    protected String email = null;
-    protected String currentPage = "feed";
+    protected String name;
+    protected String email;
     protected String password;
 
     public User(boolean funder) {
@@ -50,13 +49,6 @@ public class User {
     public void setFunder(boolean funder) {
         this.funder = funder;
     }
-    
-    public String getCurrentPage() {
-        return currentPage;
-    }
-    public void setCurrentPage(String currentPage) {
-        this.currentPage = currentPage;
-    }
 
     public String getPassword() {
         return password;
@@ -69,16 +61,16 @@ public class User {
     //choose what color an avatar should be based on modulo of its id
     public Shape getAvatar(){
         if (userId % 5 == 0){
-            return new Circle(5, colors[0]);
+            return new Circle(20, colors[0]);
         }
         if (userId % 9 == 0){
-            return new Circle(5, colors[1]);
+            return new Circle(20, colors[1]);
         }
         if (userId % 2 == 0){
-            return new Circle(5, colors[2]);
+            return new Circle(20, colors[2]);
         }
         else{
-            return new Circle(5, colors[4]);
+            return new Circle(20, colors[4]);
         }
     }
     

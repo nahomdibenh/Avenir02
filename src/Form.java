@@ -1,11 +1,17 @@
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 public class Form {
-    public FormField[] formFields;
+    protected FormField[] formFields;
+    protected Text header;
     //possible ui objects: choicebox, passwordfield, heading, buttons
 
-    public Form(String[] formFieldLabels, String[] formFieldIds){
+    public Form(String[] formFieldLabels, String[] formFieldIds, String header){
+        this.header = new Text(header);
+        this.header.setFont(Font.font("Arail", FontWeight.BOLD, 30));
         createFormFields(formFieldLabels, formFieldIds);
     }
 
@@ -20,21 +26,28 @@ public class Form {
 
     //loops through all formfields in a given form and displays them using the display method belonging to each formfield instance
     public void displayFormFields(GridPane pane){
+        pane.add(this.header, 0, 0);
         for (int i = 0; i < formFields.length; i++) {
-            formFields[i].displayFormField(pane, i);
+            formFields[i].getStyleClass().add("text-field");
+            formFields[i].displayFormField(pane, i + 1);
         }
     }
 
     //loops through all formfields in a given form and determines what should be done on submit for each field based on the field labels
-    public void actionBasedOnLabels(User user){
+    public void formToUser(User user){
         for (FormField formField : formFields) {
-            formField.actionBasedOnLabel(user);
+            formField.textFieldToUser(user);
         }
     }
     //formfields for posts
-    public void actionBasedOnLabels(Post post){
+    public void formToPost(Post post){
         for (FormField formField : formFields) {
-            formField.actionBasedOnPostLabel(post);
+            formField.textFieldToPost(post);
+        }
+    }
+    public void formToProblemArea(ProblemArea problem){
+        for (FormField formField : formFields) {
+            formField.textFieldToProblemArea(problem);
         }
     }
 

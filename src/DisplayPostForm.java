@@ -16,12 +16,12 @@ public class DisplayPostForm {
 
         String[] labels = {"Title", "ProblemArea", "Money","DesiredProffesion"};
         String[] ids = {"title", "problemarea", "money","desiredproffesion"};
-        Form form = new Form(labels, ids);
+        Form form = new Form(labels, ids, "New Post");
         form.displayFormFields(profileRoot);
         TextArea details = new TextArea();
         Button submit = new Button("Post");
-        profileRoot.add(submit, 0, 6);
-        profileRoot.add(details, 0, 7);
+        profileRoot.add(submit, 0, labels.length + 1);
+        profileRoot.add(details, 0, labels.length + 2);
 
         Post post = new Post();
         
@@ -31,7 +31,7 @@ public class DisplayPostForm {
             // user.setEmail(email.getText());
             // user.setName(company.getText());
             // user.setUrl(url.getText());
-            form.actionBasedOnLabels(post);
+            form.formToPost(post);
             post.setDetails(details.getText());
             App.setScene(HomeScreen.display());
             

@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class SignUp {
@@ -45,8 +47,11 @@ public class SignUp {
         root.getStyleClass().add("test");
 
         Button funder = new Button("Company / VC");
+        funder.getStyleClass().add("menu-buttons");
         Button individual = new Button("Individual");
+        individual.getStyleClass().add("menu-buttons");
         Button login = new Button("Login");
+        login.getStyleClass().add("neutral-button");
         Label initialQuestion = new Label("Are you a");
 
         root.add(initialQuestion, 1, 0);
@@ -91,17 +96,17 @@ public class SignUp {
         profileRoot.getStyleClass().add("test");
 
         int length = labels.split(", ").length;
-        Form form = new Form(labels.split(", "), ids.split(", "));
+        Form form = new Form(labels.split(", "), ids.split(", "), "Signup");
         form.displayFormFields(profileRoot);
 
         Button submit = new Button("Sign Up");
         Button back = new Button("Back");
         Text restriction = new Text("Username is taken");
         Text noValue = new Text("Password and Name must contain a value");
-        profileRoot.add(submit, 0, length);
-        profileRoot.add(back, 1, length);
-        profileRoot.add(noValue, 0, length + 1);
-        profileRoot.add(restriction, 0, length + 2);
+        profileRoot.add(submit, 0, length + 1);
+        profileRoot.add(back, 1, length + 1);
+        profileRoot.add(noValue, 0, length + 2);
+        profileRoot.add(restriction, 0, length + 3);
         restriction.setVisible(false);
         noValue.setVisible(false);
 
@@ -119,7 +124,7 @@ public class SignUp {
                 }
                 //if the user name does not already exist, the user can be created and the sign up is complete
                 else{
-                    form.actionBasedOnLabels(user);
+                    form.formToUser(user);
                     try {
                         if(user.funder){
                             DataServices.writeNewFunder((Funder)user);
