@@ -115,6 +115,7 @@ public class DataServices {
         }
         tempOut.write(inputBuffer.toString());
         users.delete();
+        tempOut.flush();
         tempOut.close();
         temp.renameTo(new File("users.txt"));
     }

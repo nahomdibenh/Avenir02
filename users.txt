@@ -1,12 +1,3 @@
 0 // Avenir // avenir // avenir@gmail.com // true // avenir.com
 1 // a // a // null // true // null
-2 // i // i // test@gmail.com // false // null // null // {2A0}
-0 // Avenir // avenir // avenir@gmail.com // true // avenir.com
-1 // a // a // null // true // null
-2 // i // i // test@gmail.com // false // null // null // {2A0, 2A1}
-0 // Avenir // avenir // avenir@gmail.com // true // avenir.com
-1 // a // a // null // true // null
-2 // i // i // test@gmail.com // false // null // null // {2A0, 2A2}
-0 // Avenir // avenir // avenir@gmail.com // true // avenir.com
-1 // a // a // null // true // null
-2 // i // i // test@gmail.com // false // null // null // {2A0, 2A1, 2A2}
+2 // i // i // test@gmail.com // false // null // null

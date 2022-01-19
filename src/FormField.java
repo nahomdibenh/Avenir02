@@ -12,7 +12,7 @@ public class FormField extends TextField{
     }
 
     //decide onSubmit action based on id of a formfield for sign in and sign up
-    public void actionBasedOnLabel(User user){
+    public void textFieldToUser(User user){
         //id is identifier for the formfield, not the user
         String id = this.id;
         String response = this.getText().equals("") ? null : this.getText().equals(this.getPromptText()) ? null : this.getText();
@@ -44,7 +44,7 @@ public class FormField extends TextField{
     
     }
 
-    public void actionBasedOnPostLabel(Post post){
+    public void textFieldToPost(Post post){
         String id = this.id;
         String response = this.getText();
 
@@ -60,6 +60,22 @@ public class FormField extends TextField{
         }
         if (id.equals("desiredproffesion")){
             post.setDesiredSkills(response);
+        }
+    }
+
+    public void textFieldToProblemArea(ProblemArea problem){
+        String id = this.id;
+        String response = this.getText();
+
+        //both funders and users
+        if (id.equals("name")){
+            problem.setName(response);
+        }
+        if (id.equals("impact")){
+            problem.setImpact(response);
+        }
+        if (id.equals("cause")){
+            problem.setRootCause(response);//
         }
     }
 
