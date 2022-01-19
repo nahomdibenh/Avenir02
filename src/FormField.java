@@ -12,7 +12,7 @@ public class FormField extends TextField{
     }
 
     //decide onSubmit action based on id of a formfield for sign in and sign up
-    public void textFieldToUser(User user){
+    public void actionBasedOnLabel(User user){
         //id is identifier for the formfield, not the user
         String id = this.id;
         String response = this.getText().equals("") ? null : this.getText().equals(this.getPromptText()) ? null : this.getText();
@@ -44,9 +44,9 @@ public class FormField extends TextField{
     
     }
 
-    public void textFieldToPost(Post post){
+    public void actionBasedOnPostLabel(Post post){
         String id = this.id;
-        String response = this.getText().equals("") ? null : this.getText().equals(this.getPromptText()) ? null : this.getText();
+        String response = this.getText();
 
         //both funders and users
         if (id.equals("title")){
@@ -55,26 +55,11 @@ public class FormField extends TextField{
         if (id.equals("problmearea")){
             post.setProblemArea(response);
         }
-        // if (id.equals("money")){
-        //     post.setPrizeAmount(response);
-        // }
-        //find a way to convert a string to int later, use stack overflow
-
-        
-    }
-
-    public void textFieldToProblemArea(ProblemArea problem){
-        String id = this.id;
-        String response = this.getText().equals("") ? null : this.getText().equals(this.getPromptText()) ? null : this.getText();
-
-        if (id.equals("name")){
-            problem.setName(response);
+        if (id.equals("money")){
+            post.setPrizeAmount(Integer.parseInt(response));//
         }
-        if(id.equals("impact")){
-            problem.setImpact(response);
-        }
-        if(id.equals("cause")){
-            problem.setRootCause(response);
+        if (id.equals("desiredproffesion")){
+            post.setDesiredSkills(response);
         }
     }
 

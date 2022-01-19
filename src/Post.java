@@ -10,6 +10,7 @@ public class Post {
     protected int numUpvotes = 0;
     protected int prizeAmount = 0;
     protected String details = null;
+    protected String desiredSkills = null;
     static ArrayList<Post> allPosts= new ArrayList<>();
 
     public Post() {
@@ -62,6 +63,12 @@ public class Post {
     }
     public void setDetails(String details) {
         this.details = details;
+    }
+    public String getDesiredSkills() {
+        return desiredSkills;
+    }
+    public void setDesiredSkills(String desiredSkills) {
+        this.desiredSkills = desiredSkills;
     }
 
 }
