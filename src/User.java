@@ -59,6 +59,12 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    public static User getCurrUser() {
+        return currUser;
+    }
+    public static void setCurrUser(User currUser) {
+        User.currUser = currUser;
+    }
 
     //choose what color an avatar should be based on modulo of its id
     public Shape getAvatar(){

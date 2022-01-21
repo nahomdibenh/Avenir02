@@ -47,27 +47,27 @@ public class Individual extends User{
         return problemAreas;
     }
 
-    // public void setStarredpost(boolean delete, Post post){
+    public void setStarredpost(boolean delete, Post post){
         
-    // }
-    // public ArrayList<String> getStarredPosts() {
-    //     return starredPosts;
-    // }
+    }
+    public ArrayList<String> getStarredPosts() {
+        return starredPosts;
+    }
 
-    // public ArrayList<String> getInterestedPosts(){
-    //     return interestedPosts;
-    // }
-    // public void setInterestedPosts(ArrayList<String> interestedPosts) {
-    //     this.interestedPosts = interestedPosts;
-    // }
+    public ArrayList<String> getInterestedPosts(){
+        return interestedPosts;
+    }
+    public void setInterestedPosts(ArrayList<String> interestedPosts) {
+        this.interestedPosts = interestedPosts;
+    }
 
-    // public void setUpvotedPosts(ArrayList<String> upvotedPosts) {
-    //     this.upvotedPosts = upvotedPosts;
-    // }
+    public void setUpvotedPosts(ArrayList<String> upvotedPosts) {
+        this.upvotedPosts = upvotedPosts;
+    }
 
-    // public ArrayList<String> getUpvotedPosts() {
-    //     return upvotedPosts;
-    // }
+    public ArrayList<String> getUpvotedPosts() {
+        return upvotedPosts;
+    }
 
     // public ArrayList<String> setProblemAreas(boolean delete, String problem){
 

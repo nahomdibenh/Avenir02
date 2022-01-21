@@ -42,6 +42,7 @@ public class Profile {
     }
 
     public static BorderPane profilePage(User user){
+        
         BorderPane pane = new BorderPane();
         pane.setTop(userBio(user));
         pane.setPadding(new Insets(10));
