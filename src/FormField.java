@@ -6,7 +6,7 @@ public class FormField extends TextField{
     protected String id = "";
 
     public FormField(String label, String id){
-        super(label);
+        super();
         this.id = id;
         this.setPromptText(label);
     }
@@ -77,6 +77,12 @@ public class FormField extends TextField{
         if (id.equals("cause")){
             problem.setRootCause(response);//
         }
+    }
+
+    public void textFieldToArticle(Article article){
+        String response = this.getText();
+
+        article.setTitle(response);
     }
 
     //display textfield

@@ -14,11 +14,12 @@ public class DataServices {
 
     private static File users;
     private static File temp;
+    private static File problemAreas;
     private static Scanner sc;
     private static BufferedReader in;
     private static PrintWriter out;
     private static PrintWriter tempOut;
-    private static StringBuffer inputBuffer = new StringBuffer();
+    private static StringBuffer inputBuffer;
 
     private static void createFiles() throws IOException{
         users = new File("users.txt");
@@ -34,6 +35,8 @@ public class DataServices {
         //appends the information
         out = new PrintWriter(new BufferedWriter(new FileWriter("users.txt", true)));
         tempOut = new PrintWriter(new BufferedWriter(new FileWriter("temp.txt")));
+        //reset inputBuffer of previous data
+        inputBuffer = new StringBuffer();
 
     }
 
@@ -78,11 +81,16 @@ public class DataServices {
             else {
                 String profession = temp[5].equals("null") ? null : temp[5];
                 String skills = temp[6].equals("null") ? null : temp[6];
+                //problem areas
                 users.add(new Individual(name, id, email, profession, skills, password));
             }
         }
         User.totalUsers = users.size();
         return users;
+    }
+
+    public static void createProblemAreas(ProblemArea problem){
+
     }
 
     public static void updateProblemAreas(Individual user, ProblemArea problem) throws IOException{
