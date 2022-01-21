@@ -50,7 +50,8 @@ public class FormField extends TextField {
         // this line gets the id of the textfield
         String id = this.id;
         // gets the text inputted from the post
-        String response = this.getText();
+        String response = this.getText().equals("") ? null
+        : this.getText().equals(this.getPromptText()) ? null : this.getText();
         // This method simply gets the input from the currentuser when creating a new
         // post and
         // sets those inputs to the respective setter method based on specified id.
@@ -59,7 +60,6 @@ public class FormField extends TextField {
         }
         if (id.equals("problemarea")) {
             post.setProblemArea(response);
-            System.out.println(1);
         }
         if (id.equals("money")) {
             post.setPrizeAmount(Integer.parseInt(response));//
@@ -72,7 +72,8 @@ public class FormField extends TextField {
 
     public void textFieldToProblemArea(ProblemArea problem) {
         String id = this.id;
-        String response = this.getText();
+        String response = this.getText().equals("") ? null
+        : this.getText().equals(this.getPromptText()) ? null : this.getText();
 
         // both funders and users
         if (id.equals("name")) {
@@ -86,10 +87,11 @@ public class FormField extends TextField {
         }
     }
 
-    public void textFieldToArticle(Article article){
-        String response = this.getText();
+    public void textFieldToContent(UserContent content){
+        String response = this.getText().equals("") ? null
+                : this.getText().equals(this.getPromptText()) ? null : this.getText();
 
-        article.setTitle(response);
+        content.setTitle(response);
     }
 
     //display textfield

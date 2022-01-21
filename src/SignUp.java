@@ -100,7 +100,11 @@ public class SignUp {
         form.displayFormFields(profileRoot);
 
         Button submit = new Button("Sign Up");
+        submit.getStyleClass().add("submit-button");
+
         Button back = new Button("Back");
+        back.getStyleClass().add("neutral-button");
+
         Text restriction = new Text("Username is taken");
         Text noValue = new Text("Password and Name must contain a value");
         profileRoot.add(submit, 0, length + 1);

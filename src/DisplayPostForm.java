@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -9,7 +11,7 @@ public class DisplayPostForm {//comment this whole file
     // refer to signupdisplay for potential view
     //This method checks if the input in the textfield of the 
     //money section when creating post is an int
-    static boolean moneyChecker(Form form) {
+    private static boolean moneyChecker(Form form) {
         //this line gets the text inputted in the money section of the post creation page,
         //and sets the text to the variable String money
         String money = form.getFormFieldById("money").getText();
@@ -19,11 +21,15 @@ public class DisplayPostForm {//comment this whole file
             Integer.parseInt(money);
             return true;
         } catch (NumberFormatException e) {
-            // TODO: handle exception
+            System.out.println(e);
         }
 
         return false;
     }
+    private static boolean nameIsValid(Form form){
+        return !form.getFormFieldById("title").getText().isEmpty();
+    }
+
 
     //
     static public Scene postForm(){
@@ -48,8 +54,8 @@ public class DisplayPostForm {//comment this whole file
         Button submit = new Button("Post");
 
         //these 2 lines add the specified buttons below the position of the textfields
-        profileRoot.add(submit, 0, labels.length + 1);
-        profileRoot.add(details, 0, labels.length + 2);
+        profileRoot.add(details, 0, labels.length + 1);
+        profileRoot.add(submit, 0, labels.length + 2);
 
         Post post = new Post();
 
@@ -57,16 +63,25 @@ public class DisplayPostForm {//comment this whole file
             
             //if sttatment that checks if input is int, if not print "error"
             //checks if the input on textfield money is an int
-            if (moneyChecker(form)==true){
-            //converts teh textfield user input to an post object 
-            form.formToPost(post);
-            //because details is an text area and isn't part of the formfield, it needs to be added seperatly
-            post.setDetails(details.getText());
-            //changes scene
-            App.setScene(HomeScreen.display());
-            }else{
+            // and if title has been given
+            if (moneyChecker(form) && nameIsValid(form)){
+                //converts the textfield user input to an post object 
+                form.formToPost(post);
+                //because details is an text area and isn't part of the formfield, it needs to be added seperatly
+                post.setDetails(details.getText());
                 
-                Text moneyError = new Text("Incorrect Money input");
+                //store new post
+                try {
+                    DataServices.createPost(post);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                //changes scene
+                App.setScene(HomeScreen.display());
+            }
+            else{
+                
+                Text moneyError = new Text("Money Should Be A Number and Title Must Be Included");
                 //prints the error message 3 rows below the textfields
                 //(because the detials and submit button are on top of it)
                 profileRoot.add(moneyError, 0, labels.length + 3);

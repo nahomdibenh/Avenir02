@@ -58,7 +58,7 @@ public class Login {
         });
 
         signUpButton.setOnAction(value -> {
-            SignUp.initialQuestion();;
+            SignUp.initialQuestion();
         });
 
         App.setScene(scene);

@@ -27,7 +27,10 @@ public class App extends Application{
 
         //sets the total users value to the static variable "totalUsers" in the "User" class which is used to calculate userId
         DataServices.getUsers();
+        //displays any previously stored posts
+        Post.allPosts = DataServices.getPosts();
 
+        //displays the first GUI, a login screen
         Login.loginDisplay();
 
 

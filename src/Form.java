@@ -50,9 +50,9 @@ public class Form {
             formField.textFieldToProblemArea(problem);
         }
     }
-    public void formToArticle(Article article){
+    public void formToContent(UserContent content){
         for (FormField formField : formFields) {
-            formField.textFieldToArticle(article);
+            formField.textFieldToContent(content);
         }
     }
 
