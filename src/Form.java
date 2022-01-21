@@ -50,6 +50,11 @@ public class Form {
             formField.textFieldToProblemArea(problem);
         }
     }
+    public void formToArticle(Article article){
+        for (FormField formField : formFields) {
+            formField.textFieldToArticle(article);
+        }
+    }
 
     public FormField getFormFieldById(String id){//usefull
         for (int i = 0; i < formFields.length; i++) {

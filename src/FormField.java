@@ -5,8 +5,8 @@ import javafx.scene.layout.Pane;
 public class FormField extends TextField {
     protected String id = "";
 
-    public FormField(String label, String id) {
-        super(label);
+    public FormField(String label, String id){
+        super();
         this.id = id;
         this.setPromptText(label);
     }
@@ -86,8 +86,14 @@ public class FormField extends TextField {
         }
     }
 
-    // display textfield
-    public void displayFormField(GridPane pane, int row) {
+    public void textFieldToArticle(Article article){
+        String response = this.getText();
+
+        article.setTitle(response);
+    }
+
+    //display textfield
+    public void displayFormField(GridPane pane, int row){
         pane.add(this, 0, row);
     }
 }

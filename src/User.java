@@ -23,6 +23,8 @@ public class User {
         this.email = email;
         this.userId = userId;
         this.password = password;
+        this.userId = totalUsers;
+        User.totalUsers += 1;
     }
 
     public String getName() {
@@ -76,7 +78,7 @@ public class User {
             return new Circle(20, colors[2]);
         }
         else{
-            return new Circle(20, colors[4]);
+            return new Circle(20, colors[3]);
         }
     }
     

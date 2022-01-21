@@ -4,6 +4,7 @@
     -fx-vgap: 7;
 }
 
+
 .text-field {
     -fx-border-color: rgba(168, 168, 168, 0.507);
     -fx-border-width: 1 1 1 1;
@@ -28,5 +29,5 @@
 }
 
 .neutral-button {
-    -fx-background-color: rgb(250, 235, 19);
+    -fx-background-color: #faeb13;
 }

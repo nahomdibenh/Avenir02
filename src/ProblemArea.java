@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class ProblemArea {
     protected String name;
-    // ArrayList<Content> content;
+    protected ArrayList<Content> content = new ArrayList<>();
     protected String rootCause;
     protected String impact;
     protected String nextStep;
@@ -53,5 +53,33 @@ public class ProblemArea {
     }
     public void setProblemStatement(String problemStatement) {
         this.problemStatement = problemStatement;
+    }
+    public ArrayList<Content> getContent() {
+        return content;
+    }
+
+    public ArrayList<Content> getArticles(){
+        ArrayList<Content> content = getContent();
+        ArrayList<Content> articles = new ArrayList<>();
+        for (Content info : content) {
+            if(info.getType()){
+                articles.add(info);
+            }
+        }
+        return articles;
+    }
+    
+    public ArrayList<Content> getResources(){
+        ArrayList<Content> content = getContent();
+        ArrayList<Content> resources = new ArrayList<>();
+        for (Content info : content) {
+            if(!info.getType()){
+                resources.add(info);
+            }
+        }
+        return resources;
+    }
+    public static ProblemArea getCurrProblemArea() {
+        return currProblemArea;
     }
 }
