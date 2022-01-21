@@ -70,6 +70,7 @@ public class Post {
     public void setDesiredSkills(String desiredSkills) {
         this.desiredSkills = desiredSkills;
     }
+    
 
 }
 

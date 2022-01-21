@@ -51,7 +51,7 @@ public class Form {
         }
     }
 
-    public FormField getFormFieldById(String id){
+    public FormField getFormFieldById(String id){//usefull
         for (int i = 0; i < formFields.length; i++) {
             if (formFields[i].id.equals(id)){
                 return formFields[i];
@@ -59,4 +59,6 @@ public class Form {
         }
         return null;
     }
+    //search for id 
+    //is id the one u looking for 
 }
