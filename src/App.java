@@ -1,5 +1,4 @@
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
@@ -14,6 +13,7 @@ public class App extends Application{
         launch(args);
     }
 
+    //helper function to easily adjust the scene from different files
     public static void setScene(Scene scene){
         App.window.setScene(scene);
     }
@@ -21,6 +21,7 @@ public class App extends Application{
     @Override
     public void start(Stage primaryStage) throws IOException{
 
+        //aliasing
         window = primaryStage;
 
         primaryStage.setTitle("Life");
@@ -28,13 +29,11 @@ public class App extends Application{
         //sets the total users value to the static variable "totalUsers" in the "User" class which is used to calculate userId
         DataServices.getUsers();
         //displays any previously stored posts
-        Post.allPosts = DataServices.getPosts();
 
-        //displays the first GUI, a login screen
+        //displays the first Pane on scene, a login screen
         Login.loginDisplay();
 
 
-        // primaryStage.setScene(scene);
         primaryStage.show();
     }
 }

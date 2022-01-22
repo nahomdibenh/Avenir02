@@ -1,9 +1,6 @@
-import java.io.IOException;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
@@ -15,7 +12,6 @@ public class DisplayPostForm {//comment this whole file
         //this line gets the text inputted in the money section of the post creation page,
         //and sets the text to the variable String money
         String money = form.getFormFieldById("money").getText();
-        
         try {
 
             Integer.parseInt(money);
@@ -52,6 +48,7 @@ public class DisplayPostForm {//comment this whole file
 
         TextArea details = new TextArea();
         Button submit = new Button("Post");
+        submit.getStyleClass().add("submit-button");
 
         //these 2 lines add the specified buttons below the position of the textfields
         profileRoot.add(details, 0, labels.length + 1);
@@ -68,14 +65,8 @@ public class DisplayPostForm {//comment this whole file
                 //converts the textfield user input to an post object 
                 form.formToPost(post);
                 //because details is an text area and isn't part of the formfield, it needs to be added seperatly
-                post.setDetails(details.getText());
+                post.setDetails(details.getText().isEmpty() ? null : details.getText());
                 
-                //store new post
-                try {
-                    DataServices.createPost(post);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
                 //changes scene
                 App.setScene(HomeScreen.display());
             }

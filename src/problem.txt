@@ -1,3 +1,5 @@
 0A0 // 0 // Water Crisis // Open Defecation // 50M // - Economically incentivizing cleaner solutions //  // [0A0B0, 0A0B1]
 0A1 // 0 // Testing // null // null //  //  // [0A1B2, 0A1B3]
 0A2 // 0 // Testing 2 // null // null //  //  // []
+0A0 // 0 // Water Crisis // Opendefecation // 50M //  // Snowball type effect // []
+0A4 // 0 // Global Warming // null // null //  //  // []

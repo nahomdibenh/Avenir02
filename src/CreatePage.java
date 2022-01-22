@@ -1,22 +1,15 @@
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javafx.geometry.Insets;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -33,13 +26,15 @@ import javafx.scene.text.Text;
 
 public class CreatePage {
 
+    //verify a formfield with the id "name" is not empty
     public static boolean validName(Form form){
         FormField field = form.getFormFieldById("name");
-        return !field.getText().equals("");
+        return !field.getText().isEmpty();
     }
 
     //Create a singular rectangular block with a title and specified styles. Returning a transparent overlapping
-    //rectangle for onClick events
+    //rectangle for later specified onClick events
+    //A pane is also inputted to add the StackPane as a child rather than having to return a complex array or object
     public static Rectangle block(String text, String styles, Color color, FontWeight weight, int FontSize, Pane pane){
         //Using a stack pane since things will overlap
         StackPane stack = new StackPane();
@@ -55,17 +50,19 @@ public class CreatePage {
         String r = Integer.toHexString((int) (color.getRed() * 255));
         String g = Integer.toHexString((int) (color.getGreen() * 255));
         String b = Integer.toHexString((int) (color.getBlue() * 255));
+        //adding r + "0" in the case r only has a value of 0
         r = r.length() == 1 ? r + "0" : r;
         g = g.length() == 1 ? g + "0" : g;
         b = b.length() == 1 ? b + "0" : b;
 
         //Set the button background color equal to the rectangle background color by taking rectangle color and converting to RGB
         title.setStyle(styles + "-fx-background-color: #" + r + g + b);
-        Rectangle test = new Rectangle(200, 200);
-        test.setFill(Color.TRANSPARENT);
-        stack.getChildren().addAll(rect, title, test);
+        
+        Rectangle overlay = new Rectangle(200, 200);
+        overlay.setFill(Color.TRANSPARENT);
+        stack.getChildren().addAll(rect, title, overlay);
         pane.getChildren().add(stack);
-        return test;
+        return overlay;
     }
 
     //Given a piece of content, blocks will be displayed and a pane is returned for display and different onClick 
@@ -91,6 +88,7 @@ public class CreatePage {
         GridPane gPane = new GridPane();
         gPane.setPadding(new Insets(10));
 
+        //Seperating the content by articles and resources
         Text articleHeading = new Text("Articles");
         articleHeading.setFont(Font.font("Arail", FontWeight.MEDIUM, 25));
 
@@ -134,12 +132,10 @@ public class CreatePage {
         gPane.add(resourceHeading, 0, 3);
         gPane.add(resourcePane, 0, 4);
 
-
-        // VBox pane = new VBox(10, artsicleHeaderBox, articleBox);
         HomeScreen.setCenter(gPane);
     }
 
-    //the header for a given problem area
+    //the header for a given problem area (content filled out when creating a new problem area)
     public static GridPane problemAreaHeader(ProblemArea problemArea){
         GridPane gPane = new GridPane();
         String[] text = {problemArea.getName(), problemArea.getProblemStatement(), problemArea.getImpact(), 
@@ -177,12 +173,14 @@ public class CreatePage {
         fPane.setPrefWrapLength(800);
 
         ArrayList<ProblemArea> problemAreas = ((Individual) user).getProblemAreas();
+        //Create a rectangle for every ProblemArea and use the block method to create the StackPane visual layout
         Rectangle[] problemRectangles = new Rectangle[problemAreas.size()];
         for (int i = 0; i < problemAreas.size(); i++) {
             problemRectangles[i] = block(problemAreas.get(i).getName(), "", User.colors[i % User.colors.length], FontWeight.MEDIUM, 25, fPane);
 
         }
 
+        //Specifying the onClick for each rectangle
         for (int i = 0; i < problemRectangles.length; i++) {
             int iterator = i;
             problemRectangles[i].setOnMouseClicked(value -> {
@@ -232,20 +230,13 @@ public class CreatePage {
         gPane.add(create, 0, labels.length + 3);
 
         create.setOnAction(value -> {
-            Article article = new Article(ProblemArea.currProblemArea);
+            //form is complete if it's name and body are not empty
             if(validName(form) && !body.getText().isEmpty()){
+                //create instance of article only after form is submitted successfully to prevent a loan rectangle without a title
+                Article article = new Article(ProblemArea.currProblemArea);
                 //convert user input into an article object where the data can be stored
                 form.formToContent(article);
                 article.setBody(body.getText());
-                try {
-                    //Save data to the backend
-                    //Updating articles with their new text
-                    DataServices.createArticle(article);
-                    //Updating problemAreas to hold a new piece of content
-                    DataServices.updateProblemAreas(ProblemArea.currProblemArea, article);
-                } catch (IOException e) {
-                    System.out.println(e);
-                }
                 displayContent(ProblemArea.currProblemArea);
             }
             else{
@@ -256,7 +247,7 @@ public class CreatePage {
         HomeScreen.setCenter(gPane);
     }
 
-    //Form for creating a resource object (type of content)
+    //Form for creating a resource form (type of content)
     public static void createResource(){
         GridPane gPane = new GridPane();
         GridPane resourcePane = new GridPane();
@@ -301,15 +292,6 @@ public class CreatePage {
                 //move all Links from the temp arraylist
                 resource.getLinks().addAll(temp);
                 form.formToContent(resource);
-                try {
-                    //Save data to the backend
-                    //Newly created resource with user input
-                    DataServices.createResource(resource);
-                    //Add to the array of content in the problem area
-                    DataServices.updateProblemAreas(ProblemArea.currProblemArea, resource);
-                } catch (IOException e) {
-                    System.out.println(e);
-                }
                 displayContent(ProblemArea.currProblemArea);
             }
             else{
@@ -319,7 +301,9 @@ public class CreatePage {
 
         //function to dynamically add more links to a resource
         addMore.setOnAction(value -> {
+            //stop the user from adding more links if they are already filling out one
             addMore.setVisible(false);
+
             TextField link = new TextField();
             link.setPromptText("Resource URL");
             TextArea description = new TextArea();
@@ -339,16 +323,15 @@ public class CreatePage {
                 if(link.getText().isEmpty() || description.getText().isEmpty()){
                     emptyWarning.setVisible(true);
                 }
+                //if form is success, create the new link object and add it to the temp arrayList
                 else{
                     Link lObject = new Link(link.getText(), description.getText());
                     temp.add(lObject);
-                    try {
-                        DataServices.createLink(lObject);
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
                     addMore.setVisible(true);
+                    //remove all children so the user can add more links
                     resourcePane.getChildren().removeAll(link, description, finishResource, emptyWarning);
+                    //display to the user how many links they have created by updating the last character of 
+                    //the text
                     int lastVal = resourceCountText.getText().charAt(resourceCountText.getText().length() - 1) - '0';
                     resourceCountText.setText("Number of resources created: " + (lastVal + 1));
                 }
@@ -358,25 +341,29 @@ public class CreatePage {
         HomeScreen.setCenter(gPane);
     }
 
+    //display the content of an article collected during the createArticle form
     public static void displayArticle(Article article){
         GridPane gPane = new GridPane();
+        gPane.setPadding(new Insets(15));
         gPane.setVgap(10);
-        gPane.setPadding(new Insets(10));
 
         Header header = new Header(article.getTitle());
         gPane.add(header.getHeader(), 0, 0);
         String[] sections = article.getBody().split("\n");
         int indexer = 1;
+        //for every line in the body text
         for (String string : sections) {
+            //use lazy evaluation to avoid cases where the substring of * can not be created
             if(string.length() > 3 && string.substring(0, 3).equals("***")){
+                //create the header starting after the three *
                 Header subHeader = new Header(string.substring(3));
                 gPane.add(subHeader.getHeader(FontWeight.MEDIUM, 25), 0, indexer);
                 gPane.add(subHeader.getSeparator(), 0, indexer + 1);
                 indexer += 2;
             }
+            //add regular text to the screen otherwise
             else{
                 Text text = new Text(string);
-                text.wrappingWidthProperty().bind(App.window.widthProperty());
                 gPane.add(text, 0, indexer);
                 indexer++;
             }
@@ -384,11 +371,11 @@ public class CreatePage {
         HomeScreen.setCenter(gPane);
     }
 
+    //display resource object create with the createResource form
     public static void displayResource(Resource resource){
         GridPane gPane = new GridPane();
+        gPane.setPadding(new Insets(15));
         gPane.setVgap(10);
-        gPane.setPadding(new Insets(10));
-
         Header header = new Header(resource.getTitle());
         gPane.add(header.getHeader(), 0, 0);
         for (int i = 0, row = 1; i < resource.getLinks().size(); i++) {
@@ -412,11 +399,12 @@ public class CreatePage {
         HomeScreen.setCenter(gPane);
     }
 
-    //form screen for creating a new problem area
+    //form for creating a new problem area
     public static void createProblemArea(){
         GridPane gPane = new GridPane();
         gPane.getStyleClass().add("test");
 
+        //utilises the custom made form class for simlified textfields and onSubmit actions
         String[] labels = {"Problem Name", "Potential Impact", "Root Cause"};
         String[] ids = {"name", "impact", "cause"};
         Form form = new Form(labels, ids, "Problem Description");
@@ -443,10 +431,12 @@ public class CreatePage {
 
 
         submit.setOnAction(value -> {
-            ProblemArea problem = new ProblemArea();
-            form.formToProblemArea(problem);
-            if (validName(form)){
 
+            if (validName(form)){
+                ProblemArea problem = new ProblemArea();
+
+                //get textfield input and save the data to these instance of ProblemArea
+                form.formToProblemArea(problem);
                 problem.setProblemStatement(problemStatement.getText());
                 problem.setNextStep(nextSteps.getText());
 
@@ -454,12 +444,14 @@ public class CreatePage {
                 //any methods with a user parameter can be given as the current user
                 ((Individual)User.currUser).getProblemAreas().add(problem);
                 try {
+                    //create a new ProblemArea line in the text file
                     DataServices.createProblemAreas(problem);
+                    //update the user so it stores the id of the the problem area
                     DataServices.updateUser((Individual)User.currUser);
                 } catch (IOException e) {
                     System.out.println(e);
                 }
-                //the current user is the only one who can create any content
+                //return the user to their Problem Area Grid
                 problemAreaGrid(User.currUser);
             }
             else{

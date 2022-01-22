@@ -1,3 +1,5 @@
+//A type of user that specifically focuses on identifying talent
+
 public class Funder extends User{
     String URL;
 

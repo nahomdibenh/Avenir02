@@ -1,12 +1,15 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+//A classed used by resources in a composition relationship
+
 public class Link {
     protected String linkId;
     protected String url;
     protected String description;
     protected static int numLinks = 0;
 
+    //using numLinks as the unqiue identifier since it changes with every link creation
     public Link(String url, String description){
         this.url = url;
         this.description = description;
@@ -14,13 +17,7 @@ public class Link {
         numLinks++;
     }
 
-    public Link(String linkId, String url2, String description2) {
-        this.linkId = linkId;
-        this.url = url2;
-        this.description = description2;
-        numLinks++;
-    }
-
+    //getters and setters
     public String getUrl() {
         return url;
     }
@@ -33,24 +30,4 @@ public class Link {
     public void setDescription(String description) {
         this.description = description;
     };
-    
-    @Override
-    public String toString() {
-        return this.linkId + " // " + this.url + " // " + this.description.replace("\n", "????;");
-    }
-
-    public static Link getLinkById(String id){
-        ArrayList<Link> allLinks;
-        try {
-            allLinks = DataServices.getLinks();
-            for (Link link : allLinks) {
-                if(link.linkId.equals(id)){
-                    return link;
-                }
-            }
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-        return null;
-    }
 }

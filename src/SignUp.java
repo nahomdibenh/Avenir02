@@ -19,7 +19,9 @@ public class SignUp {
     static boolean userNameExists(String name){
         ArrayList<User> users;
         try {
+            //get all the users
             users = DataServices.getUsers();
+            //see if the argument matches a username in the database
             for (User user : users) {
                 if (user.getName().equals(name)){
                     return true;
@@ -32,6 +34,7 @@ public class SignUp {
         return false;
     }
 
+    //check if the name or password are empty since they are needed to check if the user exists
     static boolean checkIfEmpty(Form form){
         String name = form.getFormFieldById("name").getText();
         String password = form.getFormFieldById("password").getText();
@@ -40,6 +43,7 @@ public class SignUp {
 
     }
 
+    //tell if the user is either a funder or an individual
     static void initialQuestion(){
         GridPane root = new GridPane();
         Scene scene = new Scene(root, 800, 800);
@@ -128,9 +132,11 @@ public class SignUp {
                 }
                 //if the user name does not already exist, the user can be created and the sign up is complete
                 else{
+                    //convert user enetered data to a User instance
                     form.formToUser(user);
                     try {
                         if(user.funder){
+                            //write a new funder to the database
                             DataServices.writeNewFunder((Funder)user);
                         }
                         else{
@@ -140,6 +146,7 @@ public class SignUp {
                         System.out.println("exception on write during sign-up");
                         System.out.println(e);
                     }
+                    //set the current user to the one that just signed in
                     User.currUser = user;
                     App.setScene(HomeScreen.display());
                 }

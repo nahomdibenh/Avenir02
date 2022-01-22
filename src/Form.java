@@ -1,13 +1,13 @@
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+//saving work for creating forms
 public class Form {
     protected FormField[] formFields;
     protected Text header;
-    //possible ui objects: choicebox, passwordfield, heading, buttons
+    //possible other ui objects: choicebox, passwordfield, heading, buttons
 
     public Form(String[] formFieldLabels, String[] formFieldIds, String header){
         this.header = new Text(header);
@@ -45,18 +45,21 @@ public class Form {
             formField.textFieldToPost(post);
         }
     }
+    //store all of a form's text field data to a ProblemArea object
     public void formToProblemArea(ProblemArea problem){
         for (FormField formField : formFields) {
             formField.textFieldToProblemArea(problem);
         }
     }
+
     public void formToContent(UserContent content){
         for (FormField formField : formFields) {
             formField.textFieldToContent(content);
         }
     }
 
-    public FormField getFormFieldById(String id){//usefull
+    //used the specified id on instantiation to get a specific formfield where further data can be extracted
+    public FormField getFormFieldById(String id){
         for (int i = 0; i < formFields.length; i++) {
             if (formFields[i].id.equals(id)){
                 return formFields[i];
@@ -64,6 +67,4 @@ public class Form {
         }
         return null;
     }
-    //search for id 
-    //is id the one u looking for 
 }

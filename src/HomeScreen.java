@@ -1,4 +1,5 @@
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,17 +16,19 @@ import javafx.scene.text.Text;
 public class HomeScreen {
     static BorderPane layout;
 
+    //helper static functions making it very easy to adjust the main content on the border scene (the center)
+    //use type region which panes inherit from
     public static void setCenter(Region pane) {
         layout.setCenter(pane);
     }
     //comment this method fully
-    public static Pane displayPostInfo() {
+    public static GridPane displayPostInfo() {
         GridPane v2 = new GridPane();
-        v2.setVgap(5);
-        v2.setPadding(new Insets(10));
+        v2.getStyleClass().add("test");
         int counter = 0;
         for (Post post : Post.allPosts) {
             GridPane text = new GridPane();
+            text.setVgap(10);
             User user = User.getUserById(post.userID);
             //this is all the texts that appear on the sides of the post
             Header payment = new Header("Payment: ");
@@ -51,7 +54,7 @@ public class HomeScreen {
             //10 mean the spacing between the buttons 
             HBox hbox = new HBox(10, numUpvotes, upvote, workOn);
             //this adds the hbox to the screen
-            text.add(hbox, 0, 10);
+            text.add(hbox, 0, 11);
 
             // make a set action for the upvote button, when pressed increase num of upvotes
             upvote.setOnAction(event -> {
@@ -68,27 +71,26 @@ public class HomeScreen {
             // vbutton)
             workOn.setOnAction(value -> {
                 ((Individual) User.currUser).setCurrentProject(post.getTitle());
-
             });
             //this will show the inputed user-specified values from the post 
             //and this shows the position of where the values will show on the screen
             text.add(new Header(post.getTitle()).getHeader(), 0, 0);
             //user contact
             text.add(new Header (user.getName()), 0, 1);
-            text.add(new Header (user.getEmail()), 0, 1);
+            text.add(new Header (user.getEmail()), 0, 2);
             //String value of converts the money inputed by the user into a string from an int, 
             //so that you can add the label, which requires a string
-            String prizeAmount = String.valueOf(post.getPrizeAmount()).isEmpty() ? "None" : String.valueOf(post.getPrizeAmount());
-            String problemArea = post.getProblemArea().isEmpty() ? "None" : post.getProblemArea();
-            String postDetails = post.getDetails().isEmpty() ? "None" : post.getDetails();
-            String skills = post.getDesiredSkills().isEmpty() ? "None" :post.getDesiredSkills();
+            String prizeAmount = String.valueOf(post.getPrizeAmount()) == null ? "None" : String.valueOf(post.getPrizeAmount());
+            String problemArea = post.getProblemArea() == null ? "None" : post.getProblemArea();
+            String postDetails = post.getDetails() == null ? "None" : post.getDetails();
+            String skills = post.getDesiredSkills() == null ? "None" :post.getDesiredSkills();
             text.add(new Label(prizeAmount), 0, 4);
             text.add(new Label(problemArea), 0, 6);
-            text.add(new Label(postDetails), 0, 6);
-            text.add(new Label(skills), 0, 8);
+            text.add(new Label(postDetails), 0, 8);
+            text.add(new Label(skills), 0, 10);
 
-            // Text detailsPost = new Text(10, 20, post.getDetails());
-            // Text titlePost = new Text (10,30, post.getTitle());
+
+            text.add(new Header("").getSeparator(), 0, 12);
 
             //this is the logic behind moving the post position 
             //downward after creating a new one by using
@@ -106,6 +108,7 @@ public class HomeScreen {
 
         Scene homeScene = new Scene(layout, 800, 800);
 
+        //TOP MENNU BAR
         Button posts = new Button("Posts");
         posts.setMaxWidth(230);
         Button profile = new Button("Profile");
@@ -122,7 +125,7 @@ public class HomeScreen {
             menuBar.getChildren().add(create);
         }
         menuBar.getChildren().add(logout);
-
+        //Make menu options fill the screen
         HBox.setHgrow(posts, Priority.ALWAYS);
         HBox.setHgrow(profile, Priority.ALWAYS);
         HBox.setHgrow(create, Priority.ALWAYS);
@@ -136,6 +139,7 @@ public class HomeScreen {
         Button postButton = new Button("New Post");
         postButton.getStyleClass().add("submit-button");
 
+        //Log the user out by sending them to the log in screen
         logout.setOnAction(value -> {
             Login.loginDisplay();
         });
@@ -143,18 +147,19 @@ public class HomeScreen {
         posts.setOnAction(value -> {
             layout.setTop(menuBar);
             layout.setLeft(postButton);
-            ScrollPane sPane = new ScrollPane();
-            sPane.setContent(displayPostInfo());
-            layout.setCenter(sPane);
+            layout.setCenter(displayPostInfo());
         });
 
         postButton.setOnAction(event -> {
             App.setScene(DisplayPostForm.postForm());
         });
+
+        //Go to the profile of the current user
         profile.setOnAction(value -> {
             layout.setLeft(null);
             layout.setCenter(Profile.profilePage(User.currUser));
         });
+
         create.setOnAction(value -> {
             layout.setLeft(null);
             //the curr user should only be able to press on the create page to find their content
@@ -162,11 +167,11 @@ public class HomeScreen {
             CreatePage.problemAreaGrid(User.currUser);
         });
 
+        //By default show the Posts Page
         layout.setTop(menuBar);
         layout.setLeft(postButton);
-        ScrollPane sPane = new ScrollPane();
-        sPane.setContent(displayPostInfo());
-        layout.setCenter(sPane);
+        BorderPane.setAlignment(postButton, Pos.CENTER_LEFT);
+        layout.setCenter(displayPostInfo());
         return homeScene;
     }
 }

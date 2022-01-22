@@ -25,17 +25,6 @@ public class Post {
         allPosts.add(this);
     }
 
-    public Post(String postId2, int userId2, String title2, String problemArea2, int numUpvotes2, int prize, String details2, String desiredSkills2){
-        this.postID = postId2;
-        this.userID = userId2;
-        this.title = title2;
-        this.problemArea = problemArea2;
-        this.numUpvotes = numUpvotes2;
-        this.prizeAmount = prize;
-        this.details = details2;
-        this.desiredSkills = desiredSkills2;
-    }
-
     //Getters and Setters
     public String getPostID() {
         return postID;
@@ -101,39 +90,7 @@ public class Post {
             this.numUpvotes += 1;
             //add this post to the current user's upvoted post
             User.currUser.getUpvotedPosts().add(this);
-            DataServices.updatePost(this);
-            try {
-                DataServices.updateUser(User.currUser);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
-    }
-
-    @Override
-    public String toString() {
-        String details = this.getDetails() == null ? null : this.getDetails().replace("\n", "????;");
-        return this.getPostID() + " // " + this.getUserID() + " // " + this.getTitle() + " // " + this.getProblemArea()
-                + " // " + this.getNumUpvotes() + " // " + this.getPrizeAmount() + " // " + details + " // "
-                + this.getDesiredSkills();
-    }
-
-    //helper function to get a post by its id
-    public static Post getPostById(String id){
-        ArrayList<Post> allPost;
-        try {
-            //get an array list of all stored posts to loop through
-            allPost = DataServices.getPosts();
-            for (Post post : allPost) {
-                //if the ids are equal, then they are the same post object
-                if(post.postID.equals(id)){
-                    return post;
-                }
-            }
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-        return null;
     }
 
 }

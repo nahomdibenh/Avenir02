@@ -6,12 +6,14 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
+
 public class Login {
     static User userExists(Form form){
         String name = form.getFormFieldById("name").getText();
         String password = form.getFormFieldById("password").getText();
         ArrayList<User> users;
         try {
+            //check if the user exists in the text file by comparing the username and password
             users = DataServices.getUsers();
             for (User user : users) {
                 if(user.getName().equals(name) && user.getPassword().equals(password)){
@@ -45,11 +47,14 @@ public class Login {
         pane.add(loginButton, 0, labels.length + 1);
         pane.add(signUpButton, 1, labels.length + 1);
         pane.add(incorrect, 0, labels.length + 2);
+        pane.add(new Text("Note: Only Login information and Problem Areas will be saved"), 0, labels.length + 3);
         incorrect.setVisible(false);
 
         loginButton.setOnAction(value -> {
             if(userExists(form) != null){
+                //set the current user once logged in and the method will not return null
                 User.currUser = userExists(form);
+                //set the scene to the Home Screen
                 App.setScene(HomeScreen.display());
             }
             else{
@@ -57,6 +62,7 @@ public class Login {
             }
         });
 
+        //Direct to different pane for sign up
         signUpButton.setOnAction(value -> {
             SignUp.initialQuestion();
         });

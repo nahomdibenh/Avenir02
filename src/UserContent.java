@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+//Base class laying out the commanalities between articles and resources
+
 public class UserContent {
     protected String contentId;
     protected String problemAreaId;
@@ -14,9 +16,9 @@ public class UserContent {
         this.contentId = problemId + "B" + totalContent;
         totalContent++;
         this.article = type;
-        if(ProblemArea.currProblemArea != null){
-            ProblemArea.currProblemArea.getContent().add(this);
-        }
+
+        //when content is created, it must belong to a problem area
+        ProblemArea.currProblemArea.getContent().add(this);
     }
 
     public String getContentId() {
@@ -43,20 +45,5 @@ public class UserContent {
     }
     public void setProblemAreaId(String problemAreaId) {
         this.problemAreaId = problemAreaId;
-    }
-
-    public static UserContent getContentById(String id){
-        ArrayList<UserContent> allContent;
-        try {
-            allContent = DataServices.getContent();
-            for (UserContent content : allContent) {
-                if(content.contentId.equals(id)){
-                    return content;
-                }
-            }
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-        return null;
     }
 }

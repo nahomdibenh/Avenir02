@@ -5,6 +5,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 
+//Base Parent class that lays out the specific capabilities of a user
+
 public class User {
     public static Color[] colors = {Color.PALETURQUOISE, Color.ROYALBLUE, Color.GOLD, Color.SEAGREEN};
     public static int totalUsers;
@@ -19,31 +21,23 @@ public class User {
     protected ArrayList<Post> posts = new ArrayList<>();
     protected ArrayList<Post> upvotedPosts = new ArrayList<>();
 
+    //Contructor used on sign in / up, and therefore will correlate to one more totalUser
     public User(boolean funder) {
         this.funder = funder;
         this.userId = totalUsers;
         totalUsers++;
     }
 
+    //constructor used to convert backend stored strings to nearly full user objects
     public User(boolean funder, int userId, String name, String email, String password, String postIds, String upvotedPostIds){
         this.funder = funder;
         this.name = name;
         this.email = email;
         this.userId = userId;
         this.password = password;
-
-        if(postIds != null){
-            for (String str : postIds.split(", ")) {
-                posts.add(Post.getPostById(str));
-            }
-        }
-        if(upvotedPostIds != null){
-            for (String str : upvotedPostIds.split(", ")) {
-                upvotedPosts.add(Post.getPostById(str));
-            }
-        }
-        
     }
+
+    //Getters and Setter
 
     public String getName() {
         return name;
@@ -89,6 +83,8 @@ public class User {
     public ArrayList<Post> getUpvotedPosts() {
         return upvotedPosts;
     }
+
+    //get post ids in String ArrayList to abuse the .toString() method
     public ArrayList<String> getUpvotedPostsIds(){
         ArrayList<String> ret = new ArrayList<>();
         for (Post post : this.upvotedPosts) {
@@ -120,10 +116,12 @@ public class User {
         }
     }
 
+    //Get a user by a specified id 
     public static User getUserById(int id){
         ArrayList<User> allUsers;
         try {
             allUsers = DataServices.getUsers();
+            //loop through all users and check if the ids match
             for (User user : allUsers) {
                 if(user.userId == id){
                     return user;

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 public class ProblemArea {
     protected String name;
+    //sub-content is variable so store in an ArrayList
     protected ArrayList<UserContent> content = new ArrayList<>();
     protected String rootCause;
     protected String impact;
@@ -20,6 +21,7 @@ public class ProblemArea {
         currProblemArea = this;
     }
 
+    //contrsuctor used when converting from textfile given it has all the necessary arguments
     public ProblemArea(String problemId2, int userId2, String name2, String rootCause2, String impact2,
             String nextStep2, String problemStatement2, String contentIds) {
         this.problemId = problemId2;
@@ -29,11 +31,6 @@ public class ProblemArea {
         this.impact = impact2;
         this.nextStep = nextStep2;
         this.problemStatement = problemStatement2;
-        if (contentIds != null){
-            for (String str: contentIds.split(", ")) {
-                content.add(UserContent.getContentById(str));
-            }
-        }
     }
 
     //Getters and Setters
@@ -83,6 +80,7 @@ public class ProblemArea {
         return content;
     }
 
+    //Loop through all the content and return an arrayList that only contains article content
     public ArrayList<UserContent> getArticles(){
         ArrayList<UserContent> content = getContent();
         ArrayList<UserContent> articles = new ArrayList<>();
@@ -94,6 +92,7 @@ public class ProblemArea {
         return articles;
     }
     
+    //only returns resource content
     public ArrayList<UserContent> getResources(){
         ArrayList<UserContent> content = getContent();
         ArrayList<UserContent> resources = new ArrayList<>();
@@ -104,9 +103,12 @@ public class ProblemArea {
         }
         return resources;
     }
+
     public static ProblemArea getCurrProblemArea() {
         return currProblemArea;
     }
+    //Convert the content arrayList instance variable to a string arrayList for back backend
+    //formatting the the ability to use the build in .toString for Strin arrayLists
     public ArrayList<String> getContentIds(){
         ArrayList<String> ret = new ArrayList<>();
         for (UserContent content : this.content) {
@@ -124,12 +126,16 @@ public class ProblemArea {
                 + " // " + this.getContentIds().toString();
     }
 
+    //get problems by a specified id
     public static ProblemArea getProblemById(String id){
         ArrayList<ProblemArea> allProblems;
         try {
+            //get all the problems in the backend
             allProblems = DataServices.getProblemAreas();
+            //see if the argument patches a problem id
             for (ProblemArea problem : allProblems) {
                 if(problem.problemId.equals(id)){
+                    //return the problem instance if its does
                     return problem;
                 }
             }

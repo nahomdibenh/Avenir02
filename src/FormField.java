@@ -2,6 +2,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
+//giving textfields an id so loops can be used to more easily instantiate and styilize textfields
 public class FormField extends TextField {
     protected String id = "";
 
@@ -13,8 +14,8 @@ public class FormField extends TextField {
 
     // decide onSubmit action based on id of a formfield for sign in and sign up
     public void textFieldToUser(User user) {
-        // id is identifier for the formfield, not the user
         String id = this.id;
+        //store the string as null rather than empty
         String response = this.getText().equals("") ? null
                 : this.getText().equals(this.getPromptText()) ? null : this.getText();
 
@@ -44,7 +45,6 @@ public class FormField extends TextField {
         }
 
     }
-    // comment this method
 
     public void textFieldToPost(Post post) {
         // this line gets the id of the textfield
@@ -87,6 +87,7 @@ public class FormField extends TextField {
         }
     }
 
+    //Content only has one field and therefore can directly be set to the response
     public void textFieldToContent(UserContent content){
         String response = this.getText().equals("") ? null
                 : this.getText().equals(this.getPromptText()) ? null : this.getText();
